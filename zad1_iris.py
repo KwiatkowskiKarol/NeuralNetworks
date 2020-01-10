@@ -1,4 +1,21 @@
 #Karol Kwiatkowski s15752, Piotr Szczechowski s16096
+
+###############################################################################
+###############################################################################
+####      ##### ###### ###           ### ###### ####        #####  ####### ####
+#### ###### #### #### ######## ######### ###### ### ######## #### ## ##### ####
+#### ##### ###### ## ######### ######### ###### ### ######## #### ### #### ####
+####      ######## ########### #########        ### ######## #### #### ### ####
+#### ############# ########### ######### ###### ### ######## #### ##### ## ####
+#### ############# ########### ######### ###### ### ######## #### ###### # ####
+#### ############# ########### ######### ###### ### ######## #### #######  ####
+#### ############# ########### ######### ###### ####        ##### ######## ####
+###############################################################################
+###############################################################################
+
+# jest super.
+
+
 from __future__ import absolute_import, division, print_function, unicode_literals
 
 import os
@@ -40,6 +57,7 @@ train_dataset = tf.data.experimental.make_csv_dataset(
 
 features, labels = next(iter(train_dataset))
 
+#Plots
 plt.scatter(features['petal_length'],
             features['sepal_length'],
             c=labels,
@@ -59,8 +77,7 @@ train_dataset = train_dataset.map(pack_features_vector)
 
 features, labels = next(iter(train_dataset))
 
-# Create a model using Keras
-# Model 1
+# Creating model using Keras
 model = tf.keras.Sequential([
     tf.keras.layers.Dense(10, activation=tf.nn.relu, input_shape=(4,), name='fc1'),  # input shape required
     tf.keras.layers.Dense(10, activation=tf.nn.relu, name='fc2'),
@@ -71,7 +88,7 @@ print('Neural Network Model Summary: ')
 print(model.summary())
 
 # Train the model
-#Define the loss and gradient function
+# Define the loss and gradient function
 loss_object = tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True)
 
 def loss(model, x, y):
@@ -116,10 +133,12 @@ for epoch in range(num_epochs):
         loss_value, grads = grad(model, x, y)
         optimizer.apply_gradients(zip(grads, model.trainable_variables))
 
-        # Track progress
-        epoch_loss_avg(loss_value)  # Add current batch loss
+        # Track progress with add curren batch loss
+        epoch_loss_avg(loss_value)
+
         # Compare predicted label to actual label
         epoch_accuracy(y, model(x))
+        
     # End epoch
     train_loss_results.append(epoch_loss_avg.result())
     train_accuracy_results.append(epoch_accuracy.result())
@@ -176,6 +195,7 @@ predict_dataset = tf.convert_to_tensor([
     [6.9, 3.1, 5.4, 2.1]
 ])
 
+#Usage of model
 predictions = model(predict_dataset)
 
 for i, logits in enumerate(predictions):

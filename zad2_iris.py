@@ -1,4 +1,21 @@
 #Karol Kwiatkowski s15752, Piotr Szczechowski s16096
+
+###############################################################################
+###############################################################################
+####      ##### ###### ###           ### ###### ####        #####  ####### ####
+#### ###### #### #### ######## ######### ###### ### ######## #### ## ##### ####
+#### ##### ###### ## ######### ######### ###### ### ######## #### ### #### ####
+####      ######## ########### #########        ### ######## #### #### ### ####
+#### ############# ########### ######### ###### ### ######## #### ##### ## ####
+#### ############# ########### ######### ###### ### ######## #### ###### # ####
+#### ############# ########### ######### ###### ### ######## #### #######  ####
+#### ############# ########### ######### ###### ####        ##### ######## ####
+###############################################################################
+###############################################################################
+
+# jest super.
+
+
 from __future__ import absolute_import, division, print_function, unicode_literals
 
 import os
@@ -121,10 +138,12 @@ for epoch in range(num_epochs):
         loss_value, grads = grad(model, x, y)
         optimizer.apply_gradients(zip(grads, model.trainable_variables))
 
-        # Track progress
-        epoch_loss_avg(loss_value)  # Add current batch loss
+        # Track progress with add current batch loss
+        epoch_loss_avg(loss_value)
+
         # Compare predicted label to actual label
         epoch_accuracy(y, model(x))
+        
     # End epoch
     train_loss_results.append(epoch_loss_avg.result())
     train_accuracy_results.append(epoch_accuracy.result())
